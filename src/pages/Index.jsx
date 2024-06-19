@@ -1,9 +1,19 @@
-import { Container, Text, VStack, Heading, Box, Image, Link, Button } from "@chakra-ui/react";
+import { Container, Text, VStack, Heading, Box, Image, Link, Button, useColorMode } from "@chakra-ui/react";
 import { Link as RouterLink } from "react-router-dom"; // Import RouterLink for navigation
+
+const ColorModeSwitcher = () => {
+  const { colorMode, toggleColorMode } = useColorMode();
+  return (
+    <Button onClick={toggleColorMode} position="fixed" top="1rem" right="1rem">
+      {colorMode === "light" ? "Dark" : "Light"} Mode
+    </Button>
+  );
+};
 
 const Index = () => {
   return (
     <Container centerContent maxW="container.md" height="100vh" display="flex" flexDirection="column" justifyContent="center" alignItems="center">
+      <ColorModeSwitcher />
       <VStack spacing={4}>
         <Heading as="h1" size="2xl">Welcome to My Blog</Heading>
         <Box boxSize="sm">
