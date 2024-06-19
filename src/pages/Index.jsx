@@ -1,5 +1,6 @@
-import { Container, Text, VStack, Heading, Box, Image, Link, Button, useColorMode } from "@chakra-ui/react";
+import { Container, Text, VStack, Heading, Box, Image, Link, Button, useColorMode, HStack } from "@chakra-ui/react";
 import { Link as RouterLink } from "react-router-dom"; // Import RouterLink for navigation
+import { useState } from "react"; // Import useState for managing state
 
 const ColorModeSwitcher = () => {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -11,6 +12,15 @@ const ColorModeSwitcher = () => {
 };
 
 const Index = () => {
+  const [posts, setPosts] = useState([
+    { id: 1, title: "First Post", content: "This is the first post." },
+    { id: 2, title: "Second Post", content: "This is the second post." },
+  ]);
+
+  const handleDelete = (id) => {
+    setPosts(posts.filter(post => post.id !== id));
+  };
+
   return (
     <Container centerContent maxW="container.md" height="100vh" display="flex" flexDirection="column" justifyContent="center" alignItems="center">
       <ColorModeSwitcher />
@@ -26,6 +36,15 @@ const Index = () => {
           Visit my profile
         </Link>
         <Button as={RouterLink} to="/add-post" colorScheme="teal" size="md">Add New Post</Button> {/* Add button to navigate to AddPost */}
+        {posts.map(post => (
+          <Box key={post.id} p={5} shadow="md" borderWidth="1px" width="100%">
+            <Heading fontSize="xl">{post.title}</Heading>
+            <Text mt={4}>{post.content}</Text>
+            <HStack justifyContent="flex-end">
+              <Button colorScheme="red" size="sm" onClick={() => handleDelete(post.id)}>Delete</Button>
+            </HStack>
+          </Box>
+        ))}
       </VStack>
     </Container>
   );
