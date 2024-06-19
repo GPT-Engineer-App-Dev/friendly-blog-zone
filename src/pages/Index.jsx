@@ -1,4 +1,5 @@
-import { Container, Text, VStack, Heading, Box, Image, Link } from "@chakra-ui/react";
+import { Container, Text, VStack, Heading, Box, Image, Link, Button } from "@chakra-ui/react";
+import { Link as RouterLink } from "react-router-dom"; // Import RouterLink for navigation
 
 const Index = () => {
   return (
@@ -14,6 +15,7 @@ const Index = () => {
         <Link href="https://example.com" color="teal.500" isExternal>
           Visit my profile
         </Link>
+        <Button as={RouterLink} to="/add-post" colorScheme="teal" size="md">Add New Post</Button> {/* Add button to navigate to AddPost */}
       </VStack>
     </Container>
   );
